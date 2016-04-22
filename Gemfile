@@ -48,6 +48,9 @@ group :development do
   gem 'spring'
 
   gem 'quiet_assets'
+
+  # deploy
+  gem 'mina'
 end
 
 group :test do
