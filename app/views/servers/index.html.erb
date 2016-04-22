@@ -1,0 +1,54 @@
+<div class="container">
+  <%= render 'notice' %>
+
+  <div class="page-header">
+    <h1>Listing Servers</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10">
+      <%= link_to 'All servers', servers_path, class: 'btn btn-link' %>
+      <%= link_to 'Servers with most CPU usage', most_cpu_usage_servers_path, class: 'btn btn-link' %>
+      <%= link_to 'Servers with most Memory usage', most_memory_usage_servers_path, class: 'btn btn-link' %>
+      <%= link_to 'Servers with most Disk usage', most_disk_usage_servers_path, class: 'btn btn-link' %>
+    </div>
+    <div class="col-md-2 align-right">
+      <p>
+        <%= link_to 'New Server', new_server_path, class: 'btn btn-success' %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th width="11%">Cpu usage</th>
+            <th width="11%">Memory usage</th>
+            <th width="11%">Disk usage</th>
+            <th width="20%"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @servers.each do |server| %>
+            <tr class="<%= "danger" if server.high_resources_usage? %>">
+              <td><%= server.name %></td>
+              <td><%= resource_format server.cpu_usage %></td>
+              <td><%= resource_format server.memory_usage %></td>
+              <td><%= resource_format server.disk_usage %></td>
+
+              <td class="align-center">
+                <%= link_to 'Show', server, class: "btn btn-primary" %>
+                <%= link_to 'Edit', edit_server_path(server), class: "btn btn-success" %>
+                <%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

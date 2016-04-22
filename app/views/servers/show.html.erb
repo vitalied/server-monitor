@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Server details</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-10 align-right">
+      <p>
+        <%= link_to 'Back', servers_path, class: 'btn btn-default' %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        <strong>Name:</strong>
+        <%= @server.name %>
+      </p>
+
+      <p>
+        <strong>Token:</strong>
+        <%= @server.token %>
+      </p>
+
+      <p>
+        <strong>Shutdown on high load:</strong>
+        <%= @server.shutdown_on_high_load.present? ? "Yes" : "No" %>
+      </p>
+
+      <p>
+        <strong>Cpu usage:</strong>
+        <%= resource_format @server.cpu_usage %>
+      </p>
+
+      <p>
+        <strong>Memory usage:</strong>
+        <%= resource_format @server.memory_usage %>
+      </p>
+
+      <p>
+        <strong>Disk usage:</strong>
+        <%= resource_format @server.disk_usage %>
+      </p>
+
+      <p>
+        <strong>Processes:</strong>
+      </p>
+
+      <% if @server.processes.present? %>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Process name</th>
+              <th width="10%">Cpu usage</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @server.processes.each do |process_name, cpu_usage| %>
+              <tr class="<%= "danger" if cpu_usage.to_f >= Server::HIGH_CPU_USAGE %>">
+                <td><%= process_name %></td>
+                <td><%= resource_format cpu_usage %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

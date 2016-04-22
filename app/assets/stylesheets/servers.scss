@@ -1,0 +1,19 @@
+// Place all the styles related to the Servers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.field_with_errors {
+  @extend .has-error;
+
+  .form-control {
+    color: $state-danger-text;
+  }
+}

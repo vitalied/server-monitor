@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  root 'servers#index'
+
+  resources :servers do
+    collection do
+      get :most_cpu_usage
+      get :most_memory_usage
+      get :most_disk_usage
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
