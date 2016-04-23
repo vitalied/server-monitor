@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    resource :servers, only: :update, defaults: { format: :json }
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
